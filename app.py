@@ -217,4 +217,9 @@ if __name__ == '__main__':
             adm = User(nom="Direction", matricule="ADM01", password_hash="admin123", is_admin=True)
             db.session.add(adm)
             db.session.commit()
-    app.run(debug=True)
+if __name__ == '__main__':
+    # Render utilise souvent la variable d'environnement PORT
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+

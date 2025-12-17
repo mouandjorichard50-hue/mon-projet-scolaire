@@ -212,13 +212,15 @@ def logout():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        # Cette ligne crée le fichier .db et les tables sur le serveur Render
+        db.create_all() 
+        
+        # Vérifie si l'admin existe, sinon le crée
         if not User.query.filter_by(matricule='ADM01').first():
             adm = User(nom="Direction", matricule="ADM01", password_hash="admin123", is_admin=True)
             db.session.add(adm)
             db.session.commit()
-if __name__ == '__main__':
-    # Render utilise souvent la variable d'environnement PORT
+            
     import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
